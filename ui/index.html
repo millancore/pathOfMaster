@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="node_modules\gitgraph.js\build\gitgraph.css" />
-    <script src="node_modules\gitgraph.js\build\gitgraph.js"></script>
     <link rel="stylesheet" href="node_modules\normalize.css\normalize.css">
     <link rel="stylesheet" href="node_modules\milligram\dist\milligram.min.css">
-    <link rel="stylesheet" href="estilos.css"/>
+    <link rel="stylesheet" href="estilos.css" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Path of Master</title>
 </head>
+
 <body>
+    <div class="row" id="container">
+        <div class="column" id="nav">
+            <h2>Path of Master</h2>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="column column-25" id="trem">.column</div>
+        <div class="column column-70" id="cont">.column column-50 column-offset-25</div>
+    </div>
 
-                <div class="row">
-                  <div class="column" id="nav">.column</div>
-                </div>
-              
-                <div class="row">
-                  <div class="column column-25" id="trem">.column</div>
-                  <div class="column column-70" id="cont">.column column-50 column-offset-25</div>
-                </div>
-              
 </body>
+<script src="node_modules\gitgraph.js\build\gitgraph.js"></script>
+
 </html>
