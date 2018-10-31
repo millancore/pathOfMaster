@@ -3,6 +3,9 @@
 <head>
     <link rel="stylesheet" href="node_modules\gitgraph.js\build\gitgraph.css" />
     <script src="node_modules\gitgraph.js\build\gitgraph.js"></script>
+    <link rel="stylesheet" href="node_modules\normalize.css\normalize.css">
+    <link rel="stylesheet" href="node_modules\milligram\dist\milligram.min.css">
+    <link rel="stylesheet" href="estilos.css"/>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +13,16 @@
     <title>Path of Master</title>
 </head>
 <body>
-    <h2>Path of Master</h2>
-    <canvas id="graph"></canvas>
-    <script>
-    var graph = new GitGraph({
-    template: "metro", // or blackarrow
-    orientation: "vertical",
-    elementId: 'graph',
-    mode: "extended", // or compact if you don't want the messages  
-    });
 
-    var master = graph.branch("master");
-    master.commit( { message: "Initial Commit" });
 
-</script>
+                <div class="row">
+                  <div class="column" id="nav">.column</div>
+                </div>
+              
+                <div class="row">
+                  <div class="column column-25" id="trem">.column</div>
+                  <div class="column column-70" id="cont">.column column-50 column-offset-25</div>
+                </div>
+              
 </body>
 </html>

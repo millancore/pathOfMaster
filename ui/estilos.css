@@ -1,0 +1,26 @@
+.encabesado{
+    background-color: brown;
+    color: chartreuse;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    width: 50%
+}
+
+.column{
+    background-color: black
+
+}
+
+#nav{
+    background-color: aqua;
+}
+
+#trem{
+    background-color: chartreuse;
+}
+
+#cont{
+    background-color: darkorange;
+}
