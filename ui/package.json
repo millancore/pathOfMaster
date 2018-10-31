@@ -1,0 +1,17 @@
+{
+  "name": "pathofmaster",
+  "version": "1.0.0",
+  "description": "arbol de habilidad",
+  "main": "index.js",
+  "dependencies": {
+    "gitgraph.js": "^1.13.0",
+    "jquery": "^3.3.1",
+    "milligram": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@millacore, @lehvui",
+  "license": "MIT"
+}

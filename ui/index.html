@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="node_modules\gitgraph.js\build\gitgraph.css" />
+    <script src="node_modules\gitgraph.js\build\gitgraph.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -8,5 +11,18 @@
 </head>
 <body>
     <h2>Path of Master</h2>
+    <canvas id="graph"></canvas>
+    <script>
+    var graph = new GitGraph({
+    template: "metro", // or blackarrow
+    orientation: "vertical",
+    elementId: 'graph',
+    mode: "extended", // or compact if you don't want the messages  
+    });
+
+    var master = graph.branch("master");
+    master.commit( { message: "Initial Commit" });
+
+</script>
 </body>
 </html>
