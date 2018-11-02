@@ -1,18 +1,16 @@
 
-var gitgraph = new GitGraph({
-  template: "metro",
-  orientation: "vertical",
-  mode: "compact",
-  elementId: "tree"
-});
+var login = function() {
+  axios.get('templates/login.hbs').then(function (response) {
+    document.getElementById('render').innerHTML = response.data;
+  })
+}
 
-var master = gitgraph.branch("master");
+ var routes = {
+  '/': login,
+};
 
+var router = Router(routes);
 
-//const axios = require('axios');
+router.init();
 
-// Make a request for a user with a given ID
-axios.get('../api/current/tree')
-  .then(function (response) {
-    console.log(response);
-  });
+window.location.assign('/#/');
