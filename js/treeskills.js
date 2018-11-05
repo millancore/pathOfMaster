@@ -10,7 +10,7 @@ var formnode = function () {
     document.getElementById('render').innerHTML = response.data;
   })
 };
-
+  
 var formtree = function () {
   axios.get('templates/formtree.hbs').then(function (response) {
     document.getElementById('render').innerHTML = response.data;
