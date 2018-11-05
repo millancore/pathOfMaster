@@ -15,14 +15,6 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('tree', function () {
-
-    $nodes = array(
-        'Variables',
-        'Control',
-        'Objetos'
-    );
-    
-    return json_encode($nodes);
-});
+$router->post('user/login', 'UserController@login');
+$router->post('tree/add', 'TreeController@add');
 
