@@ -11,34 +11,66 @@ var login = function () {
   })
 };
 
-var formnode = function () {
-  axios.get('templates/formnode.hbs').then(function (response) {
+var addNode = function () {
+  axios.get('templates/layout.hbs').then(function (response) {
     document.getElementById('render').innerHTML = response.data;
-  })
+
+    axios.get('templates/tree.hbs').then(function (response) {
+      document.getElementById('tree').innerHTML = response.data;
+    });
+
+    axios.get('templates/addNode.hbs').then(function (response) {
+      document.getElementById('content').innerHTML = response.data;
+    });
+
+  });
 };
 
-var formtree = function () {
-  axios.get('templates/formtree.hbs').then(function (response) {
+var addTree = function () {
+  axios.get('templates/layout.hbs').then(function (response) {
     document.getElementById('render').innerHTML = response.data;
-  })
+
+    axios.get('templates/tree.hbs').then(function (response) {
+      document.getElementById('tree').innerHTML = response.data;
+    });
+
+    axios.get('templates/addTree.hbs').then(function (response) {
+      document.getElementById('content').innerHTML = response.data;
+    });
+
+  });
 };
 
 var home = function () {
-  axios.get('templates/home.hbs').then(function (response) {
+  axios.get('templates/layout.hbs').then(function (response) {
     document.getElementById('render').innerHTML = response.data;
-  })
+
+    axios.get('templates/home.hbs').then(function (response) {
+      document.getElementById('container').innerHTML = response.data;
+    });
+
+  });
 };
 
 var tree = function () {
-  axios.get('templates/tree.hbs').then(function (response) {
+  axios.get('templates/layout.hbs').then(function (response) {
     document.getElementById('render').innerHTML = response.data;
-  })
+
+    axios.get('templates/tree.hbs').then(function (response) {
+      document.getElementById('tree').innerHTML = response.data;
+    });
+
+    axios.get('templates/nodeDescription.hbs').then(function (response) {
+      document.getElementById('content').innerHTML = response.data;
+    });
+
+  });
 };
 
 var routes = {
   '/': login,
-  '/formnode': formnode,
-  '/formtree': formtree,
+  '/addnode': addNode,
+  '/addtree': addTree,
   '/home': home,
   '/tree': tree,
 };

@@ -1,15 +1,4 @@
-.encabesado{
-    background-color: brown;
-    color: chartreuse;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    right: 0%;
-    width: 50%
-}
-
-
-.nav{
+#nav{
     background: #f4f5f6;
     border-bottom: .1rem solid #d1d1d1;
     display: block;
@@ -22,9 +11,8 @@
     z-index: 1;
 }
 
-#trem{
+#tree-canvas{
     background-color: chartreuse;
-    
 }
 
 #cont{
@@ -32,11 +20,10 @@
 }
 
 #container{
-    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 #fondo{
-
     background-color: aqua;
 }
 
@@ -46,17 +33,4 @@
     left: 0%;
     right: 0%;
     width: 50%
-
-}
-
-#campousuario{
-    background-color: aqua  
-}
-
-#botomcrear{
-    background-color: yellow
-}
-
-#desss{
-    background-color: azure
 }
