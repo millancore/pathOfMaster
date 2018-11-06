@@ -15,7 +15,7 @@ var addNode = function () {
   axios.get('templates/layout.hbs').then(function (response) {
     document.getElementById('render').innerHTML = response.data;
 
-    axios.get('templates/tree.hbs').then(function (response) {
+    loadTemplate('tree', function (response){
       document.getElementById('tree').innerHTML = response.data;
     });
 
@@ -85,6 +85,11 @@ if (token != undefined) {
   window.location.assign('/#/home');
 } else {
   window.location.assign('/#/login');
+}
+
+function loadTemplate(nameTemplate, callback)
+{
+    axios.get('templates/'+ nameTemplate + '.hbs').then(callback);
 }
 
 
