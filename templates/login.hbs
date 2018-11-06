@@ -5,13 +5,13 @@
         <div class="column">.column</div>
     </div>
     <div class="column column-25" id="formulario">
-        <form id="login">
+        <form id="login" action="" method="POST">
             <fieldset>
                 <label for="nameField">username</label>
-                <input type="text" id="username">
+                <input type="text" name="username" />
                 <label for="clave">password</label>
-                <input type="text" id="password">
-                <button class="button-primary" onclick="signIn()">Sign In</button>
+                <input type="text" name="password" />
+                <input type="submit" value="Sign In" />
             </fieldset>
         </form>
     </div>

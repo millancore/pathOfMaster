@@ -1,22 +1,13 @@
-function signIn()
-{
-    var username = document.getElementById("username").value;
-    var password =  document.getElementById("password").value;
-
-    axios.post('api/current/user/login', {
-      username: username,
-      password: password
-    }).then(function (response) {
-        if (response.status == 200) {
-            window.location.assign('/?#/home');
-            localStorage.setItem('token', response.data.token);
-        }
-    });
-}
 
 var login = function () {
   axios.get('templates/login.hbs').then(function (response) {
-    document.getElementById('render').innerHTML = response.data;
+
+    var template = Handlebars.compile(response.data);
+
+    document.getElementById('render').innerHTML = template();
+
+    loginListener();
+
   })
 };
 
@@ -25,7 +16,7 @@ var formnode = function () {
     document.getElementById('render').innerHTML = response.data;
   })
 };
-  
+
 var formtree = function () {
   axios.get('templates/formtree.hbs').then(function (response) {
     document.getElementById('render').innerHTML = response.data;
@@ -45,7 +36,7 @@ var tree = function () {
 };
 
 var routes = {
-  '/login': login,
+  '/': login,
   '/formnode': formnode,
   '/formtree': formtree,
   '/home': home,
@@ -54,12 +45,32 @@ var routes = {
 
 var router = Router(routes);
 
-router.init();
+router.init('/');
 
 var token = localStorage.getItem('token');
 
 if (token != undefined) {
-    window.location.assign('/#/home');  
+  window.location.assign('/#/home');
 } else {
-    window.location.assign('/#/login');
+  window.location.assign('/#/login');
+}
+
+
+loginListener = function () {
+
+  var formLogin = document.getElementById("login");
+
+  formLogin.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var data = new FormData(formLogin);
+
+    axios.post('api/current/user/login', data).then(function (response) {
+      if (response.status == 200) {
+        window.location.assign('#/home');
+        localStorage.setItem('token', response.data.token);
+      }
+    });
+
+  }, false);
 }
