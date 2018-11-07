@@ -11,33 +11,30 @@ var login = function () {
   })
 };
 
-var addNode = function(){
-  loadTemplate('layout', 'render')
-      .then(() => 
-          loadTemplate('addNode', 'content')
-      )
+var addNode = function () {
+  loadTemplate('layout', 'render').then(() =>
+    loadTemplate('addNode', 'content')
+  )
 };
 
-var addTree = function(){
-  loadTemplate('layout', 'render')
-      .then(() => 
-          loadTemplate('addTree', 'content')
-      )
+var addTree = function () {
+  loadTemplate('layout', 'render').then(() =>
+    loadTemplate('addTree', 'content')
+  )
 };
 
-var home = function(){
-  loadTemplate('layout', 'render')
-      .then(() => 
-          loadTemplate('home', 'container')
-      )
+var home = function () {
+  loadTemplate('layout', 'render').then(() =>
+    loadTemplate('home', 'container')
+  )
 };
 
-var tree = function(){
-  loadTemplate('layout', 'render')
-      .then(() => 
-          loadTemplate('NodeDescription', 'content')
-      )
+var tree = function () {
+  loadTemplate('layout', 'render').then(() =>
+    loadTemplate('NodeDescription', 'content')
+  )
 };
+
 var routes = {
   '/': login,
   '/addnode': addNode,
@@ -57,17 +54,18 @@ if (token != undefined) {
 } else {
   window.location.assign('/#/login');
 }
-function loadTemplate(nameTemplate,element){
-  let promesa = new Promise(function(resolve, reject){
-     axios.get('templates/' + nameTemplate + '.hbs').then(
-         function (response) {
-           document.getElementById(element).innerHTML = response.data;
-         }
-       );
-       resolve("geniall")
-     });
-     return promesa
- }
+
+function loadTemplate(nameTemplate, element) {
+  let promesa = new Promise(function (resolve, reject) {
+    axios.get('templates/' + nameTemplate + '.hbs').then(
+      function (response) {
+        document.getElementById(element).innerHTML = response.data;
+      }
+    );
+    resolve("geniall")
+  });
+  return promesa
+}
 
 
 loginListener = function () {
