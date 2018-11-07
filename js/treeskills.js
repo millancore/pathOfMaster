@@ -12,59 +12,23 @@ var login = function () {
 };
 
 var addNode = function () {
-  axios.get('templates/layout.hbs').then(function (response) {
-    document.getElementById('render').innerHTML = response.data;
-
-    loadTemplate('tree', function (response){
-      document.getElementById('tree').innerHTML = response.data;
-    });
-
-    axios.get('templates/addNode.hbs').then(function (response) {
-      document.getElementById('content').innerHTML = response.data;
-    });
-
-  });
+  loadTemplate('layout', 'render');
+  loadTemplate('addNode', 'content');
 };
 
 var addTree = function () {
-  axios.get('templates/layout.hbs').then(function (response) {
-    document.getElementById('render').innerHTML = response.data;
-
-    axios.get('templates/tree.hbs').then(function (response) {
-      document.getElementById('tree').innerHTML = response.data;
-    });
-
-    axios.get('templates/addTree.hbs').then(function (response) {
-      document.getElementById('content').innerHTML = response.data;
-    });
-
-  });
+  loadTemplate('layout', 'render');
+  loadTemplate('addTree', 'content');
 };
 
 var home = function () {
-  axios.get('templates/layout.hbs').then(function (response) {
-    document.getElementById('render').innerHTML = response.data;
-
-    axios.get('templates/home.hbs').then(function (response) {
-      document.getElementById('container').innerHTML = response.data;
-    });
-
-  });
+  loadTemplate('layout', 'render');
+  loadTemplate('home', 'container');
 };
 
 var tree = function () {
-  axios.get('templates/layout.hbs').then(function (response) {
-    document.getElementById('render').innerHTML = response.data;
-
-    axios.get('templates/tree.hbs').then(function (response) {
-      document.getElementById('tree').innerHTML = response.data;
-    });
-
-    axios.get('templates/nodeDescription.hbs').then(function (response) {
-      document.getElementById('content').innerHTML = response.data;
-    });
-
-  });
+  loadTemplate('layout', 'render');
+  loadTemplate('NodeDescription', 'content');
 };
 
 var routes = {
@@ -87,9 +51,12 @@ if (token != undefined) {
   window.location.assign('/#/login');
 }
 
-function loadTemplate(nameTemplate, callback)
-{
-    axios.get('templates/'+ nameTemplate + '.hbs').then(callback);
+async function loadTemplate(nameTemplate, element) {
+  axios.get('templates/' + nameTemplate + '.hbs').then(
+    function (response) {
+      document.getElementById(element).innerHTML = response.data;
+    }
+  );
 }
 
 
