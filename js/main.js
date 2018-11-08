@@ -1,25 +1,11 @@
 const login = require('./login');
-const treeModule = require('./tree');
 const loadTemplate = require('./templateLoader');
-
-
-var addNode = function () {
-    loadTemplate('layout', 'render').then(() =>
-        loadTemplate('addNode', 'content')
-    )
-};
-
-
-var home = function () {
-    loadTemplate('layout', 'render').then(() =>
-        loadTemplate('home', 'container')
-    )
-};
-
-
+const treeModule = require('./tree');
+const node = require('./node')
+const home = require('./home') 
 var routes = {
     '/': login,
-    '/addnode': addNode,
+    '/addnode': node,
     '/addtree': treeModule.addTree,
     '/home': home,
     '/tree': treeModule.tree,
