@@ -1,0 +1,21 @@
+<html>
+  <head><title>Megabranch with GitGraph</title></head>
+  <body>
+    <canvas id="gitGraph"></canvas>
+    <script src="http://gitgraphjs.com/js/gitgraph.min.js"></script>
+    <script>
+    //setup gitgraph object
+    var gitgraph = new GitGraph({
+      template: "metro", // or blackarrow
+      orientation: "vertical",
+      author: "Jane Doe",
+      mode: "extended" // or compact if you don't want the messages
+    });
+    //define 4 branches for use in our example
+    var master = gitgraph.branch("master");
+
+    gitgraph.commit("Commit on master");
+   
+    </script>
+  </body>
+</html>

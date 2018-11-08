@@ -1,3 +1,4 @@
+const getFormDataAsJSON = require('./getFormDataAsJSON')
 
 var login = function () {
     axios.get('templates/login.hbs').then(function (response) {
@@ -18,25 +19,7 @@ function loginListener() {
     formLogin.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        // Refactorizar a Funcion
-        var formData = new FormData(formLogin);
-
-        var dataObject = {};
-
-        formData.forEach(function (value, key) {
-            dataObject[key] = value;
-        });
-
-        var dataJson = JSON.stringify(dataObject);
-        // End
-
-
-        // Localstore!!
-        localStorage.setItem('tree', dataJson);
-
-        localStorage.getItem('tree');
-
-
+        var dataJson = getFormDataAsJSON(formLogin);
         axios.post('api/current/user/login', dataJson).then(function (response) {
             if (response.status == 200) {
                 window.location.assign('#/home');
@@ -46,5 +29,6 @@ function loginListener() {
 
     }, false);
 }
+
 
 module.exports = login;
