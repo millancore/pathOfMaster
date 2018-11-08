@@ -4,7 +4,9 @@ const getFormDataAsJSON = require('./getFormDataAsJSON')
 var addTree = function () {
     loadTemplate('layout', 'render').then(() =>
         loadTemplate('addTree', 'content')
-    ).then(() => {newtre()})
+    ).then(() => {
+        treeListener();
+    })
 };
 
 var tree = function () {
@@ -12,30 +14,30 @@ var tree = function () {
         loadTemplate('nodeDescription', 'content')
     )
 };
-function newtre() {
 
-    var newtre = document.getElementById("newtre");
-        console.log(newtre);
-    newtre.addEventListener('submit', function (event) {
+function treeListener() {
+
+    var formNewTree = document.getElementById("newTree");
+
+    formNewTree.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        var dataJson = getFormDataAsJSON(newtre);
+        var dataJson = getFormDataAsJSON(formNewTree);
 
-        newtre.setItem('tree', dataJson);
+        localStorage.setItem('tree', dataJson);
 
-        console.log(dataJson)
+        localStorage.setItem('toke', 'dasdasdh2j31243u');
 
         //var obj = JSON.parse(dataJson);
 
         //console.log(obj)
 
-        window.location.assign('#/tree');
+        //window.location.assign('#/tree');
     }, false);
 }
 
 
 module.exports = {
-    newtre: newtre,
     addTree: addTree,
     tree: tree
 };
