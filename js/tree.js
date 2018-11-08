@@ -8,7 +8,7 @@ var addTree = function () {
 
 var tree = function () {
     loadTemplate('layout', 'render').then(() =>
-        loadTemplate('NodeDescription', 'content')
+        loadTemplate('nodeDescription', 'content')
     )
 };
 

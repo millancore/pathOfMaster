@@ -12,15 +12,32 @@ var login = function () {
 };
 
 function loginListener() {
-    
+
     var formLogin = document.getElementById("login");
 
     formLogin.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        var data = new FormData(formLogin);
+        // Refactorizar a Funcion
+        var formData = new FormData(formLogin);
 
-        axios.post('api/current/user/login', data).then(function (response) {
+        var dataObject = {};
+
+        formData.forEach(function (value, key) {
+            dataObject[key] = value;
+        });
+
+        var dataJson = JSON.stringify(dataObject);
+        // End
+
+
+        // Localstore!!
+        localStorage.setItem('tree', dataJson);
+
+        localStorage.getItem('tree');
+
+
+        axios.post('api/current/user/login', dataJson).then(function (response) {
             if (response.status == 200) {
                 window.location.assign('#/home');
                 localStorage.setItem('token', response.data.token);
