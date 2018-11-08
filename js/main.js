@@ -1,8 +1,8 @@
 const login = require('./login');
-const loadTemplate = require('./templateLoader');
 const treeModule = require('./tree');
 const node = require('./node')
-const home = require('./home') 
+const home = require('./home')
+
 var routes = {
     '/': login,
     '/addnode': node,
