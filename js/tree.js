@@ -10,14 +10,15 @@ var addTree = function () {
 };
 
 var tree = function (treeName) {
-    loadTemplate('layout', 'render').then(() =>
-        loadTemplate('nodeDescription', 'content')
-    ).then(()=> {
-        console.log(treeName)
-    }    
-    ).then(() => {
-        treepPrint(treeName)
-    })
+    loadTemplate('layout', 'render').then(() => {
+        axios.get('templates/nodeDescription.hbs').then(
+            function (response) {
+                var template = Handlebars.compile(response.data);
+                var dataTree = JSON.parse(localStorage.getItem(treeName));
+                document.getElementById('content').innerHTML = template(dataTree);
+            }
+        );
+    });
 
 };
 
@@ -32,29 +33,15 @@ function treeListener() {
         var obj = JSON.parse(dataJson);
         localStorage.setItem(obj.name, dataJson);
 
-     
+
         var obj = JSON.parse(dataJson);
 
         console.log(obj)
 
-        window.location.assign('#/tree/'+ obj.name );
+        window.location.assign('#/tree/' + obj.name);
     }, false);
 }
 
-function treepPrint(treeName){
-    var tree = localStorage.getItem(treeName);
-    var Printtree =JSON.parse(tree);
-
-    p.innerHTML = Printtree.name; 
-
-    console.log(Printtree)
-
-  
-
-    
-
-    
-}
 
 module.exports = {
     addTree: addTree,
