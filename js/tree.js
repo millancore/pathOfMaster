@@ -9,10 +9,16 @@ var addTree = function () {
     })
 };
 
-var tree = function () {
+var tree = function (treeName) {
     loadTemplate('layout', 'render').then(() =>
         loadTemplate('nodeDescription', 'content')
-    )
+    ).then(()=> {
+        console.log(treeName)
+    }    
+    ).then(() => {
+        treepPrint(treeName)
+    })
+
 };
 
 function treeListener() {
@@ -23,19 +29,32 @@ function treeListener() {
         event.preventDefault();
 
         var dataJson = getFormDataAsJSON(formNewTree);
+        var obj = JSON.parse(dataJson);
+        localStorage.setItem(obj.name, dataJson);
 
-        localStorage.setItem('tree', dataJson);
+     
+        var obj = JSON.parse(dataJson);
 
-        localStorage.setItem('toke', 'dasdasdh2j31243u');
+        console.log(obj)
 
-        //var obj = JSON.parse(dataJson);
-
-        //console.log(obj)
-
-        //window.location.assign('#/tree');
+        window.location.assign('#/tree/'+ obj.name );
     }, false);
 }
 
+function treepPrint(treeName){
+    var tree = localStorage.getItem(treeName);
+    var Printtree =JSON.parse(tree);
+
+    p.innerHTML = Printtree.name; 
+
+    console.log(Printtree)
+
+  
+
+    
+
+    
+}
 
 module.exports = {
     addTree: addTree,

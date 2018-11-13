@@ -8,7 +8,7 @@ var routes = {
     '/addnode': node,
     '/addtree': treeModule.addTree,
     '/home': home,
-    '/tree': treeModule.tree,
+    '/tree/:treeName': treeModule.tree,
 };
 
 var router = Router(routes);
