@@ -16,9 +16,10 @@ var tree = function (treeName) {
                 var template = Handlebars.compile(response.data);
                 var dataTree = JSON.parse(localStorage.getItem(treeName));
                 document.getElementById('content').innerHTML = template(dataTree);
+                printtree(treeName);
             }
         );
-    });
+    })
 
 };
 
@@ -37,7 +38,23 @@ function treeListener() {
     }, false);
 }
 
-
+function printtree(treeName){
+    var nodeArray = JSON.parse(localStorage.getItem(treeName+"-node"));
+    Console.log("jajajajaj")
+    var gitgraph = new GitGraph({
+        template: "metro", 
+        orientation: "vertical",
+       author: '',
+        mode: "extended" 
+    });
+  
+    var master = gitgraph.branch("master");
+  
+    for (x=0;x<nodeArray.length;x++){
+        gitgraph.commit(nodeArray[x].name);
+    };
+  
+  }
 
 
 

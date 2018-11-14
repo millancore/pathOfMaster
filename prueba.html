@@ -1,21 +1,37 @@
+<!DOCTYPE html>
 <html>
-  <head><title>Megabranch with GitGraph</title></head>
-  <body>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="node_modules/gitgraph.js/build/gitgraph.js"></script>
+</head>
+<body>
     <canvas id="gitGraph"></canvas>
-    <script src="http://gitgraphjs.com/js/gitgraph.min.js"></script>
-    <script>
-    //setup gitgraph object
+
+
+  <script>
+      var nodos= [{name:"hola"},{name:"jajajaj"}]
+      var n = ["1","3"]
+      localStorage.setItem("node",JSON.stringify(nodos));
+      var bonos =  JSON.parse(localStorage.getItem("node"));
+      console.log(bonos);
+
+
+      
+
     var gitgraph = new GitGraph({
-      template: "metro", // or blackarrow
+      template: "metro", 
       orientation: "vertical",
-      author: "Jane Doe",
-      mode: "extended" // or compact if you don't want the messages
+     author: '"',
+      mode: "extended" 
     });
     //define 4 branches for use in our example
     var master = gitgraph.branch("master");
-
-    gitgraph.commit("Commit on master");
-   
+    for (x=0;x<nodos.length;x++){
+    gitgraph.commit(nodos[x].name);
+    };
     </script>
-  </body>
+</body>
 </html>
