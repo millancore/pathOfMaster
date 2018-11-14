@@ -32,15 +32,27 @@ function treeListener() {
         var dataJson = getFormDataAsJSON(formNewTree);
         var obj = JSON.parse(dataJson);
         localStorage.setItem(obj.name, dataJson);
-
-
-        var obj = JSON.parse(dataJson);
-
-        console.log(obj)
-
         window.location.assign('#/tree/' + obj.name);
+
+        if( localStorage.getItem("node") == null){
+                var node = [{node:"new"}];
+                localStorage.setItem("node",JSON.stringify(node));
+                
+        }else{
+
+            var bode =JSON.parse(localStorage.getItem("node"));
+            console.log(bode);
+            var node = bode.push({node:obj.name})
+            localStorage.setItem("node",JSON.stringify(node));
+            
+        }
+        
+
     }, false);
 }
+
+
+
 
 
 module.exports = {
