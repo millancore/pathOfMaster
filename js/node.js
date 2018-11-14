@@ -18,21 +18,16 @@ function newNode() {
 
         var node = getFormDataAsJSON(formNewNode);
 
-        console.log(node)
-
         if (localStorage.getItem("node") == null) {
-            var nodeArray = [node];
-            localStorage.setItem("node", nodeArray);
-
+            var nodeArray = [JSON.parse(node)];
+            localStorage.setItem("node", JSON.stringify(nodeArray));
         } else {
-
-            var bode = JSON.parse(localStorage.getItem("node"));
-            console.log(bode);
-            bode.push(JSON.parse(node));
-            localStorage.setItem("node", JSON.stringify(bode));
+            var nodeArray = JSON.parse(localStorage.getItem("node"));
+            nodeArray.push(JSON.parse(node));
+            localStorage.setItem("node", JSON.stringify(nodeArray));
         };
 
-        window.location.assign('#/tree');
+        window.location.assign('#/tree/sarza');
 
     }, false);
 
