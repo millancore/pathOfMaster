@@ -5,7 +5,7 @@ const home = require('./home')
 
 var routes = {
     '/': login,
-    '/addnode': node,
+    '/addnode/:treeName': node,
     '/addtree': treeModule.addTree,
     '/home': home,
     '/tree/:treeName': treeModule.tree,
