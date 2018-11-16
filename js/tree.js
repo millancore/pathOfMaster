@@ -33,8 +33,20 @@ function treeListener() {
         var dataJson = getFormDataAsJSON(formNewTree);
         var obj = JSON.parse(dataJson);
         localStorage.setItem(obj.name, dataJson);
-        window.location.assign('#/tree/' + obj.name);
+        
 
+
+
+        if (localStorage.getItem("usuarioarbol") == null) {
+            var treeArray = [obj.name];
+            localStorage.setItem("usuarioarbol", JSON.stringify(treeArray));
+        } else {
+            var treeArray = JSON.parse(localStorage.getItem("usuarioarbol"));
+            arbol = obj.name
+            treeArray.push(arbol);
+            localStorage.setItem("usuarioarbol", JSON.stringify(treeArray));
+        };
+        window.location.assign('#/tree/' + obj.name);
     }, false);
 }
 
