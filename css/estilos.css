@@ -13,6 +13,8 @@
 
 #gitGraph{
     background-color: chartreuse;
+    width: 339px  !important;
+    height: 138px !important;;
 }
 
 #cont{
