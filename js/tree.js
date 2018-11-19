@@ -52,7 +52,6 @@ function treeListener() {
 
 function printtree(treeName){
     var nodeArray = JSON.parse(localStorage.getItem(treeName+"-node"));
-    console.log("jajajajaj")
     var gitgraph = new GitGraph({
         template: "metro", 
         orientation: "vertical",
