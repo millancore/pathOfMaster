@@ -19,6 +19,7 @@ function homeTree() {
         
         var para = document.createElement("li");
         para.setAttribute("id", treArray[x]);
+        para.setAttribute("class","treeName")
 
         var node = document.createTextNode(treArray[x]);
         para.appendChild(node);

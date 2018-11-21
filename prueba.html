@@ -8,30 +8,9 @@
   <script src="node_modules/gitgraph.js/build/gitgraph.js"></script>
 </head>
 <body>
-    <canvas id="gitGraph"></canvas>
-
-
+  <input type="submit" value="Sign In" onclick="lala()" />
   <script>
-      var nodos= [{name:"hola"},{name:"jajajaj"}]
-      var n = ["1","3"]
-      localStorage.setItem("node",JSON.stringify(nodos));
-      var bonos =  JSON.parse(localStorage.getItem("node"));
-      console.log(bonos);
-
-
-      
-
-    var gitgraph = new GitGraph({
-      template: "metro", 
-      orientation: "vertical",
-     author: '"',
-      mode: "extended" 
-    });
-    //define 4 branches for use in our example
-    var master = gitgraph.branch("master");
-    for (x=0;x<nodos.length;x++){
-    gitgraph.commit(nodos[x].name);
-    };
+ 
     </script>
 </body>
 </html>
