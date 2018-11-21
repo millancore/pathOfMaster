@@ -52,10 +52,37 @@ function treeListener() {
 
 function printtree(treeName){
     var nodeArray = JSON.parse(localStorage.getItem(treeName+"-node"));
-    var gitgraph = new GitGraph({
-        template: "metro", 
+
+    var myTemplateConfig = {
+        colors: [ "#F00", "#0F0", "#00F" ], // branches colors, 1 per column
+        branch: {
+          lineWidth: 8,
+          spacingX: 50,
+          showLabel: true,                  // display branch names on graph
+        },
+        commit: {
+          spacingY: -80,
+          dot: {
+            size: 12
+          },
+          message: {
+            displayAuthor: true,
+            displayBranch: false,
+            displayHash: false,
+            font: "normal 12pt Arial"
+          },
+          shouldDisplayTooltipsInCompactMode: false, // default = true
+          tooltipHTMLFormatter: function ( commit ) {
+            return "" + commit.sha1 + "" + ": " + commit.message;
+          }
+        }
+      };
+      var myTemplate = new GitGraph.Template( myTemplateConfig );
+
+      var gitgraph = new GitGraph({
+        template: myTemplate, 
         orientation: "vertical",
-       author: '',
+        author: '',
         mode: "extended" 
     });
   

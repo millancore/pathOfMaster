@@ -4,7 +4,7 @@ const node = require('./node')
 const home = require('./home')
 
 var routes = {
-    '/': login,
+    '/login': login,
     '/addnode/:treeName': node,
     '/addtree': treeModule.addTree,
     '/home': home,
@@ -15,11 +15,8 @@ var router = Router(routes);
 
 router.init('/');
 
-
 var token = localStorage.getItem('token');
 
-if (token != undefined) {
-    window.location.assign('/#/home');
-} else {
+if (token == undefined) {
     window.location.assign('/#/login');
-}
+} 

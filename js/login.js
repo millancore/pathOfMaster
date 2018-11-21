@@ -1,14 +1,18 @@
 const getFormDataAsJSON = require('./getFormDataAsJSON')
 
 var login = function () {
+
+    //Check
+    var token = localStorage.getItem('token');
+
+    if (token != undefined) {
+        window.location.assign('/#/home');
+    } 
+
     axios.get('templates/login.hbs').then(function (response) {
-
         var template = Handlebars.compile(response.data);
-
         document.getElementById('render').innerHTML = template();
-
         loginListener();
-
     })
 };
 

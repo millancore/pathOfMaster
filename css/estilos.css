@@ -1,3 +1,8 @@
+body{
+    background-color: #edeff0;
+}
+
+
 #nav{
     background: #f4f5f6;
     border-bottom: .1rem solid #d1d1d1;
@@ -13,8 +18,8 @@
 
 #gitGraph{
     background-color: chartreuse;
-    width: 339px  !important;
-    height: 138px !important;;
+    /*width: 339px  !important;
+    height: 138px !important;*/
 }
 
 #cont{
@@ -25,14 +30,21 @@
     margin-top: 5px;
 }
 
-#fondo{
-    background-color: aqua;
+#login-page{
+    background-color: #3b4750;
 }
 
-#formulario{
-    background-color: brown;
-    top: 0%;
-    left: 0%;
-    right: 0%;
-    width: 50%
+#login-section{
+    height: 100vh;
+    padding-top: 170px;
+}
+
+#login-text{
+    color: #edeff0;
+}
+
+#login-form{
+    background-color: #edeff0;
+    border-radius: 3px;
+    padding-top: 25px;
 }
