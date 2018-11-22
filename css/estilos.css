@@ -11,9 +11,9 @@ body{
 }
 
 #gitGraph{
-    background-color: chartreuse;
-    /*width: 339px  !important;
-    height: 138px !important;*/
+    background-color: #3b4750;
+    width: 339px  !important;
+    height: 538px !important;
 }
 
 #cont{
@@ -52,4 +52,44 @@ body{
 
 .treeName{
     cursor: pointer
+}
+
+#r{
+    box-sizing: border-box;
+
+}
+
+.InputAddOn-item {
+    background-color: hsla(31,15%,50%,.1);
+    color: #666;
+    font: inherit;
+    font-weight: 400;
+}
+
+.InputAddOn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1.5em;
+}
+
+.InputAddOn-item:last-child {
+    border-radius: 0 2px 2px 0;
+}
+
+.InputAddOn-field:not(:first-child) {
+    border-left: 0;
+}
+
+.InputAddOn-field, .InputAddOn-item {
+    border: 1px solid hsla(31,15%,50%,.25);
+    padding: .5em .75em;
+}
+
+.InputAddOn-field {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }
