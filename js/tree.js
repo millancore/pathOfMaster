@@ -4,8 +4,9 @@ const getFormDataAsJSON = require('./getFormDataAsJSON')
 var addTree = function () {
     loadTemplate('layout', 'render').then(() =>
         loadTemplate('addTree', 'content')
-    ).then(() => {
+    ).then(() => {  
         treeListener();
+        var simplemded = new SimpleMDE({ element: document.getElementById("treeDestrion")});
     })
 };
 
@@ -16,7 +17,7 @@ var tree = function (treeName) {
                 var template = Handlebars.compile(response.data);
                 var dataTree = JSON.parse(localStorage.getItem(treeName));
                 document.getElementById('content').innerHTML = template(dataTree);
-                printtree(treeName);
+                printtree(treeName);               
             }
         );
     })

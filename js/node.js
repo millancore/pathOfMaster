@@ -6,6 +6,7 @@ var addNode = function (treeName) {
         loadTemplate('addNode', 'content')
     ).then(() => {
         newNode(treeName);
+        var simplemde = new SimpleMDE({ element: document.getElementById("nodeDescription") });
     })
 };
 
