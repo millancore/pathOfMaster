@@ -1,12 +1,14 @@
 const loadTemplate = require('./templateLoader');
 const getFormDataAsJSON = require('./getFormDataAsJSON');
+const simpleConfig = require('./simpleConfig');
 
 var addNode = function (treeName) {
     loadTemplate('layout', 'render').then(() =>
         loadTemplate('addNode', 'content')
     ).then(() => {
         newNode(treeName);
-        var simplemde = new SimpleMDE({ element: document.getElementById("nodeDescription") });
+        simpleConfig.element = document.getElementById("nodeDescription");
+        var simplemde = new SimpleMDE(simpleConfig);
     })
 };
 
