@@ -53,28 +53,39 @@ function treeListener() {
 
 function printtree(treeName){
     var nodeArray = JSON.parse(localStorage.getItem(treeName+"-node"));
-    var nodos = SVG("tree-see").size(300, 10000);
+    size2 = 10
+    for (x = 0; x < nodeArray.length; x++) {
+         size2 += 90; 
+    }
+    var nodos = SVG("tree-see").size(300, size2);
     var circley = 50;
     var liney1 = 60;
     var liney2 = 0;
+    var texty = 58;
 
     for (x = 0; x < nodeArray.length; x++) {
         liney2 += 90; 
     }
 
-    var line = nodos.line(133, liney1, 133, liney2).stroke({ width: 10 });
+    var line = nodos.line(123, liney1, 123, liney2).stroke({ width: 7, color: '#f4f5f6' });
     
     line.fill( '#f09' )
 
     for (x = 0; x < nodeArray.length; x++) {
-         var circle = nodos.circle(65).fill('#4e6fc9').move(100, circley);
+         var circle = nodos.circle(45).fill('#4e6fc9').move(100, circley).stroke({ width: 4, color: '#f4f5f6' });
 
     
-    
-    
+         var text = nodos.text(nodeArray[x].name);
+         text.move(160,texty)
+         text.font({
+            family:   'Helvetica'
+          , size:     24
+          , fill:  '#f4f5f6'
+          })
             
         liney1 += 190;
         circley += 90;
+        texty += 90;
 
         let i = nodeArray[x]
         circle.click(function() {
