@@ -10,10 +10,9 @@ class UserController extends Controller
     {
         $response = array(
             "response" => true,
-            "token" => "1BF2A38E20C193004AB4207F4A20B99D84C8CED9" 
+            "token" => "1BF2A38E20C193004AB4207F4A20B99D84C8CED9"
         );
 
         print(json_encode($response));
     }
-    
 }

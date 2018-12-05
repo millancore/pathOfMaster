@@ -21,16 +21,9 @@ function newNode(treeName) {
 
         var node = getFormDataAsJSON(formNewNode);
 
-        if (localStorage.getItem(treeName+"-node") == null) {
-            var nodeArray = [JSON.parse(node)];
-            localStorage.setItem(treeName+"-node", JSON.stringify(nodeArray));
-        } else {
-            var nodeArray = JSON.parse(localStorage.getItem(treeName+"-node"));
-            nodeArray.push(JSON.parse(node));
-            localStorage.setItem(treeName+"-node", JSON.stringify(nodeArray));
-        };
-
-        window.location.assign('#/tree/'+treeName);
+        axios.post('api/current/node/add', node).then(() => {
+            window.location.assign('#/tree/'+treeName);
+        });
 
     }, false);
 
