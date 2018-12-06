@@ -19,9 +19,15 @@ function newNode(treeName) {
     formNewNode.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        var node = getFormDataAsJSON(formNewNode);
+        var nodo = getFormDataAsJSON(formNewNode,true);
+            nodo.treename = treeName;
+          node= JSON.stringify(nodo)
+           console.log(node)
+        var config = {
+            headers: {'Content-Type': 'application/json'}
+          };
 
-        axios.post('api/current/node/add', node).then(() => {
+        axios.post('api/current/node/add', node, config).then(() => {
             window.location.assign('#/tree/'+treeName);
         });
 

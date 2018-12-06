@@ -1,4 +1,4 @@
-module.exports = function getFormDataAsJSON(formLogin) {
+module.exports = function getFormDataAsJSON(formLogin,type) {
     var doc = new FormData(formLogin);
 
     var dataObject = {};
@@ -6,6 +6,11 @@ module.exports = function getFormDataAsJSON(formLogin) {
     doc.forEach(function (value, key) {
         dataObject[key] = value;
     });
-    var dataJson = JSON.stringify(dataObject)
-    return dataJson
+    var dataJson = JSON.stringify(dataObject);
+
+     if( type == true){
+        return dataObject
+     }else{
+        return dataJson
+     }
 }
