@@ -14,30 +14,43 @@ var home = function () {
 
 
 function homeTree() {
-    var treArray = JSON.parse(localStorage.getItem("usuarioarbol"));
-    for (x = 0; x < treArray.length; x++) {
-        
-        var para = document.createElement("li");
-        para.setAttribute("id", treArray[x]);
-        para.setAttribute("class","treeName")
+    
+    axios.get('api/current/tree/home_tree')
+    .then(function (response) {
+     var data = response.data
 
-        var node = document.createTextNode(treArray[x]);
-        para.appendChild(node);
+     console.log(data[1].ID);
+     console.log(data[1].name);
+    let x = 0;
 
-        let treeName = treArray[x]
-        para.addEventListener('click', function (event) {
-            event.preventDefault();
-            window.location.assign('#/tree/' + treeName);
-
-
-
-        }, false);
-
-        document.getElementById("lists").appendChild(para);
-        
-
-    };
-
+     for (x = 0; x <data.length; x++) {
+         
+         var para = document.createElement("li");
+         para.setAttribute("id", data[x].ID);
+         para.setAttribute("class","treeName")
+ 
+         var node = document.createTextNode(data[x].name);
+         para.appendChild(node);
+ 
+         let treeName = data[x].name;
+         para.addEventListener('click', function (event) {
+             event.preventDefault();
+             window.location.assign('#/tree/' + treeName);
+ 
+ 
+ 
+         }, false);
+ 
+         document.getElementById("lists").appendChild(para);
+         
+         x++;
+     };
+ 
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
 
 }
 

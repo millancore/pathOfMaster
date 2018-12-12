@@ -46,7 +46,14 @@ function treeListener() {
             treeArray.push(arbol);
             localStorage.setItem("usuarioarbol", JSON.stringify(treeArray));
         };
-        window.location.assign('#/tree/' + obj.name);
+        var config = {
+            headers: {'Content-Type': 'application/json'}
+          };
+
+        axios.post('api/current/tree/add', dataJson, config).then(() => {
+            window.location.assign('#/tree/' + obj.name);
+        });
+        
     }, false);
 }
 
