@@ -57,7 +57,6 @@ function treeListener() {
 }
 
 function printtree(ID){
-    console.log(ID);
     axios.get('api/current/tree/' + ID)
     .then(function (response) {
         var nodeArray = response.data;
