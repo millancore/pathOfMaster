@@ -33,7 +33,7 @@ class TreeController extends Controller
     echo $nodeId;
     }
 
-    public function home_tree(Request $request){
+    public function homeTree(Request $request){
  
         $cypher = new Cypher;
         $client = new Client('localhost', 7474);

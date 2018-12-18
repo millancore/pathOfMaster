@@ -15,12 +15,11 @@ var home = function () {
 
 function homeTree() {
     
-    axios.get('api/current/tree/home_tree')
+    axios.get('api/current/tree/homeTree')
     .then(function (response) {
      var data = response.data
     
 
-     console.log(data)
     let x = 0;
 
      for (x = 0; x <data.length; x++) {
