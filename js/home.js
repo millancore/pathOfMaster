@@ -18,32 +18,31 @@ function homeTree() {
     axios.get('api/current/tree/home_tree')
     .then(function (response) {
      var data = response.data
+    
 
-     console.log(data[1].ID);
-     console.log(data[1].name);
+     console.log(data)
     let x = 0;
 
      for (x = 0; x <data.length; x++) {
          
          var para = document.createElement("li");
-         para.setAttribute("id", data[x].ID);
+         para.setAttribute("id", data[x].id);
          para.setAttribute("class","treeName")
- 
+  
          var node = document.createTextNode(data[x].name);
          para.appendChild(node);
- 
-         let treeName = data[x].name;
+
+         let treeID = data[x].id;
          para.addEventListener('click', function (event) {
              event.preventDefault();
-             window.location.assign('#/tree/' + treeName);
+             window.location.assign('#/tree/' + treeID);
  
- 
+        
  
          }, false);
  
          document.getElementById("lists").appendChild(para);
          
-         x++;
      };
  
     })

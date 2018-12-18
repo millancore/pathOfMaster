@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Everyman\Neo4j\Client;
+use Everyman\Neo4j\Client as clientjadell;
 use  Everyman\Neo4j\Cypher\Query;
+use Pheo4j\Client;
+use Pheo4j\Cypher;
 
 class TreeController extends Controller
 {
@@ -12,8 +14,7 @@ class TreeController extends Controller
     {   
 
         $data = $request->all();
-
-        $client = new Client();
+        $client = new clientjadell();
         
         $client->getTransport()
                ->setAuth('neo4j', 'pom');
@@ -33,25 +34,54 @@ class TreeController extends Controller
     }
 
     public function home_tree(Request $request){
-        $client = new Client();
-        
-        $client->getTransport()
-               ->setAuth('neo4j', 'pom');
+ 
+        $cypher = new Cypher;
+        $client = new Client('localhost', 7474);
+        $client->setAuth('neo4j', 'pom');
 
-        $queryString = "MATCH (n:tree) RETURN n";
-        $query = new Query($client, $queryString);
-        $result = $query->getResultSet();
-        $treeArray = [];
-        $x = 0;
-        foreach ($result as $row) {
-                
-                $treeArray[$x]['ID'] = $row->getid();
-                $treeArray[$x]['name'] = $row->name;
-                $x= $x + 1;
         
+
+        $client->Cypher('MATCH (n:tree) RETURN n.name as name ,ID(n) as id ');
+        $response = $client->execute();
+        $treeRaw =  $response->toArray();
+
+        return $treeRaw;
+    }
+    public function showTree(Request $request, $id)
+    {
+
+
+        $cypher = new Cypher;
+        $client = new Client('localhost', 7474);
+        $client->setAuth('neo4j', 'pom');
+
+        $id = $id;
+
+        $client->Cypher('MATCH (tree) WHERE ID(tree) = '.$id.' RETURN tree');
+        $response = $client->execute();
+        $treeRaw =  $response->toArray();
+    
+
+      
+        $treName = $treeRaw[0]['tree']->name;
+    
+        $client->Cypher('MATCH ('.$treName.')-[:sept]-() RETURN '.$treName.'.name as name, ID('.$treName.') as id');
+        $response = $client->execute();
+        $showTreeRaw =  $response->toArray();
+        $showTree = [];
+        $x = 0 ;
+        $longitud = count($showTreeRaw);
+
+        for($i=0; $i<$longitud; $i = $i + 2)
+        {
+            $showTree[$x] = $showTreeRaw[$i];
+            $x = $x +1;
         }
+        $showTree[$x] = $showTreeRaw[$longitud-1];
+        
 
-        var_dump($treeArray);
-        //return response()->json($treeArray;);
+        return $showTree;
+
+        
     }
 }
