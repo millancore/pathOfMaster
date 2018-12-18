@@ -13,7 +13,7 @@ var routes = {
     '/addnode/:treeName': node,
     '/addtree': treeModule.addTree,
     '/home': home,
-    '/tree/:treeName': treeModule.tree,
+    '/tree/:treeID': treeModule.tree,
     '/logout':logout ,
 };
 
