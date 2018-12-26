@@ -10,7 +10,7 @@ var logout = function() {
 
 var routes = {
     '/login': login,
-    '/addnode/:treeName': node,
+    '/addnode/:treeID': node,
     '/addtree': treeModule.addTree,
     '/home': home,
     '/tree/:treeID': treeModule.tree,

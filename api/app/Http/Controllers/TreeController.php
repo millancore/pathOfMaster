@@ -57,27 +57,25 @@ class TreeController extends Controller
 
         $id = $id;
 
-        $client->Cypher('MATCH (tree) WHERE ID(tree) = '.$id.' RETURN tree');
+        $client->Cypher('MATCH (tree) WHERE ID(tree) = '.$id.' RETURN tree.name as name,tree.description as description,ID(tree) as id');
         $response = $client->execute();
         $treeRaw =  $response->toArray();
     
 
-      
-        $treName = $treeRaw[0]['tree']->name;
     
-        $client->Cypher('MATCH ('.$treName.')-[:sept]-() RETURN '.$treName.'.name as name, ID('.$treName.') as id');
+        $client->Cypher('MATCH (n:tree) WHERE ID(n)='.$id.'  MATCH (n)-[r:sept*..]->(m) RETURN ID(m) as id , m.name  as name,m.dercripton as  dercripton');
         $response = $client->execute();
         $showTreeRaw =  $response->toArray();
         $showTree = [];
-        $x = 0 ;
+        $showTree[0] = $treeRaw[0];
+        $x = 1 ;
         $longitud = count($showTreeRaw);
 
-        for($i=0; $i<$longitud; $i = $i + 2)
+        for($i=0; $i<$longitud; $i = $i + 1)
         {
             $showTree[$x] = $showTreeRaw[$i];
             $x = $x +1;
         }
-        $showTree[$x] = $showTreeRaw[$longitud-1];
         
 
         return $showTree;
