@@ -7,8 +7,6 @@ var addTree = function () {
         loadTemplate('addTree', 'content')
     ).then(() => {
         treeListener();
-        simpleConfig.element = document.getElementById("treeDestrion");
-        var simplemde = new SimpleMDE(simpleConfig);
     })
 };
 
@@ -17,7 +15,7 @@ var tree = function (ID) {
         axios.get('templates/nodeDescription.hbs').then(
             function (response) {
                 var template = Handlebars.compile(response.data);
-                document.getElementById('content').innerHTML = template();
+                document.getElementById('content').innerHTML = template({id:ID});
                 printtree(ID);
             }
         );
@@ -36,21 +34,12 @@ function treeListener() {
         var obj = JSON.parse(dataJson);
         localStorage.setItem(obj.name, dataJson);
 
-        if (localStorage.getItem("usuarioarbol") == null) {
-            var treeArray = [obj.name];
-            localStorage.setItem("usuarioarbol", JSON.stringify(treeArray));
-        } else {
-            var treeArray = JSON.parse(localStorage.getItem("usuarioarbol"));
-            arbol = obj.name
-            treeArray.push(arbol);
-            localStorage.setItem("usuarioarbol", JSON.stringify(treeArray));
-        };
         var config = {
             headers: {'Content-Type': 'application/json'}
           };
 
         axios.post('api/current/tree/add', dataJson, config).then(() => {
-            window.location.assign('#/tree/' + obj.name);
+            window.location.assign('#/home');
         });
         
     }, false);
@@ -60,27 +49,19 @@ function printtree(ID){
     axios.get('api/current/tree/' + ID)
     .then(function (response) {
         var nodeArray = response.data;
-
-      
-
-        size2 = 10;
-        for (x = 0; x < nodeArray.length; x++) {
-             size2 += 90; 
-        }
+        var size2 = 10 + (90 * nodeArray.length);
         var nodos = SVG("tree-see").size(300, size2);
         var circley = 50;
-        var liney1 = 60;
-        var liney2 = 0;
+        var liney1 = 50;
+        var liney2 = 0 + (90 * nodeArray.length);
         var texty = 58;
-    
-        for (x = 0; x < nodeArray.length; x++) {
-            liney2 += 90;
-        }
-    
-        var line = nodos.line(123, liney1, 123, liney2).stroke({ width: 7, color: '#f4f5f6' });
         
-        line.fill( '#f09' )
+
+        var line = nodos.line(123, liney1, 123, liney2).stroke({ width: 7, color: '#f4f5f6' });
+                   line.fill( '#f09' )
     
+
+
         for (x = 0; x < nodeArray.length; x++) {
              var circle = nodos.circle(45).fill('#4e6fc9').move(100, circley).stroke({ width: 4, color: '#f4f5f6' });
     
@@ -92,28 +73,26 @@ function printtree(ID){
               , size:     24
               , fill:  '#f4f5f6'
               })
-                
-            liney1 += 190;
-            circley += 90;
-            texty += 90;
+           
+              
+             liney1 += 190;
+             circley += 90;
+             texty += 90;
     
-            let i = nodeArray[x]
-            circle.click(function () {
-                axios.get('templates/nodeDescription.hbs').then(
+
+             let i = nodeArray[x]
+             circle.click(function () {
+                 axios.get('templates/nodeDescription.hbs').then(
                     function (response) {
-                        var template = Handlebars.compile(response.datsa);
-                        var dataTree = JSON.parse(localStorage.getItem(treeName + "-node"));
+                        var template = Handlebars.compile(response.data);
                         var nodeName = i.name;
-                        var nodeDescription = i.descripcion;
-                        var node = { name: nodeName, description: nodeDescription };
-                        console.log(node)
-    
+                        var nodeDescription = i.id;
+                        var node = { id:i.id, name: nodeName, description: nodeDescription  };
                         document.getElementById('content').innerHTML = template(node);
                     }
                 );
             })
         }
-  console.log(response.data);
 })
 .catch(function (error) {
   console.log(error);
