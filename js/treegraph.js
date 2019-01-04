@@ -1,8 +1,10 @@
-function TreeGraph(canvas) {
+
+
+module.exports = function TreeGraph (canvas) {
 
     this.tree = [];
 
-    this.add = function(node){
+    this.add = function(node){S
         this.tree.push(node);
     }
 

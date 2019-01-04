@@ -19,15 +19,58 @@
     <script>
         var canvas = SVG("tree-see").size(300, 600);
 
+        var newtree = [ 
+        { name: "arbol", description: null, id: 586 },
+        { id: 587, name: "primer paso", dercripton: null },
+        { id: 980, name: "jgvjh", dercripton: "vhjvj" },
+        { id: 979, name: "jgvjh", dercripton: "vhjvj" },
+        { id: 588, name: "segundo paso", dercripton: null },
+        { id: 589, name: "tercer paso", dercripton: null },
+        { id: 590, name: "cuarto paso", dercripton: null },
+        { id: 948, name: "jgvjh", dercripton: "vhjvj" },
+        { id: 1035, name: "sf", dercripton: "wqr" },
+        { id: 974, name: "sf", dercripton: "wqr" },
+        { id: 789, name: "sf", dercripton: "wqr" },
+        { id: 975, name: "sf", dercripton: "wqr" },
+        { id: 706, name: "sf", dercripton: "wqr" },
+        { id: 707, name: "sf", dercripton: "wqr" },
+        { id: 897, name: "sf", dercripton: "wqr" },
+        { id: 976, name: "sf", dercripton: "wqr" },
+        { id: 837, name: "sf", dercripton: "wqr" },
+        { id: 898, name: "sf", dercripton: "wqr" },
+        { id: 804, name: "sf", dercripton: "wqr" },
+        { id: 708, name: "sf", dercripton: "wqr" },
+        { id: 805, name: "sf", dercripton: "wqr" },
+        { id: 899, name: "sf", dercripton: "wqr" },
+        { id: 838, name: "sf", dercripton: "wqr" },
+        { id: 977, name: "sf", dercripton: "wqr" },
+        { id: 839, name: "sf", dercripton: "wqr" },
+        { id: 978, name: "sf", dercripton: "wqr" },
+        { id: 790, name: "wqr", dercripton: "qwr" },
+        { id: 709, name: "wqr", dercripton: "qwr" },
+        { id: 947, name: "wqr", dercripton: "qwr" },
+        { id: 900, name: "wqr", dercripton: "qwr" },
+        { id: 840, name: "wqr", dercripton: "qwr" },
+        { id: 1116, name: "rwq", dercripton: "qwr" }]
+
+        var newTreeLength = newtree.length;
+
+        console.log(newTreeLength)
+
         var TreeGraph = new TreeGraph(canvas);
 
 
-        for (let index = 0; index < 3; index++) {
+        for (let index = 0; index < newTreeLength; index++) {
+
+
+            console.log(index);
 
             TreeGraph.add({
-                name: 'Node ' + index,
+                name: newtree[index].name,
+                dercripton: newtree[index].dercripton,
+                id: newtree[index].id,
                 click: function () {
-                    
+                    document.getElementById('content').innerHTML = template(newtree[index]);
                 }
             });
         }
