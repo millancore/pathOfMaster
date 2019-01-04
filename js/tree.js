@@ -1,5 +1,6 @@
 const loadTemplate = require('./templateLoader');
 const getFormDataAsJSON = require('./getFormDataAsJSON');
+const TreeGraph = require('./treegraph');
 
 
 var addTree = function () {
@@ -53,16 +54,11 @@ function printtree(ID){
         var newTreeLength = newtree.length;
 
         console.log(newTreeLength)
-        var TreeGraph = new TreeGraph(canvas);
-
-
+        var graph = new TreeGraph(canvas);
 
         for (let index = 0; index < newTreeLength; index++) {
 
-
-
-
-            TreeGraph.add({
+            graph.add({
                 name: newtree[index].name,
                 dercripton: newtree[index].dercripton,
                 id: newtree[index].id,
@@ -73,8 +69,7 @@ function printtree(ID){
         }
         console.log(index);
 
-
-        TreeGraph.render();  
+        graph.render();  
 })
 .catch(function (error) {
   console.log(error);
