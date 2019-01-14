@@ -51,6 +51,13 @@ body{
 
 }
 
+#treeBotton{
+    position: absolute;
+    top: 550px;
+    right:1050px;
+    width:200px;
+}
+
 .treeName{
     cursor: pointer
 }

@@ -47,9 +47,10 @@ class TreeController extends Controller
 
         return $treeRaw;
     }
-    public function showTree(Request $request, $id)
+    public function showTree(Request $request, $id,$pag)
     {
 
+        $pags= intval($pag);
 
         $cypher = new Cypher;
         $client = new Client('localhost', 7474);
@@ -57,28 +58,56 @@ class TreeController extends Controller
 
         $id = $id;
 
-        $client->Cypher('MATCH (tree) WHERE ID(tree) = '.$id.' RETURN tree.name as name,tree.description as description,ID(tree) as id');
-        $response = $client->execute();
-        $treeRaw =  $response->toArray();
-    
+
+        if($pags < 2){
+            $client->Cypher('MATCH (tree) WHERE ID(tree) = '.$id.' RETURN tree.name as name,tree.description as description,ID(tree) as id');
+            $response = $client->execute();
+            $treeRaw =  $response->toArray();
+
 
     
-        $client->Cypher('MATCH (n:tree) WHERE ID(n)='.$id.'  MATCH (n)-[r:sept*..]->(m) RETURN ID(m) as id , m.name  as name,m.dercripton as  dercripton');
-        $response = $client->execute();
-        $showTreeRaw =  $response->toArray();
-        $showTree = [];
-        $showTree[0] = $treeRaw[0];
-        $x = 1 ;
-        $longitud = count($showTreeRaw);
+        
+            $client->Cypher('MATCH (n:tree) WHERE ID(n)='.$id.'  MATCH (n)-[r:sept*..   ]->(m) RETURN ID(m)  as id , m.name  as name,m.dercripton as  dercripton LIMIT 9');
+            $response = $client->execute();
+            $showTreeRaw =  $response->toArray();
+            $showTree = [];
+            $showTree[0]  = $treeRaw[0];
+            $x = 1 ;
+            $longitud = count($showTreeRaw);
+    
+            for($i=0; $i<$longitud; $i = $i + 1)
+            {
+                $showTree[$x] = $showTreeRaw[$i];
+                $x = $x +1;
+            }
 
-        for($i=0; $i<$longitud; $i = $i + 1)
-        {
-            $showTree[$x] = $showTreeRaw[$i];
-            $x = $x +1;
+            return $showTree;
+            
+    
+        }else{
+            $limt = $pags * 10;
+            $skip = ($pags - 1) * 10;
+
+            $client->Cypher('MATCH (n:tree) WHERE ID(n)='.$id.'  MATCH (n)-[r:sept*..   ]->(m) RETURN ID(m)  as id , m.name  as name,m.dercripton as  dercripton SKIP '.$skip.' LIMIT 10');
+            $response = $client->execute();
+            $showTreeRaw =  $response->toArray();
+            $showTree = [];
+            $x = 0 ;
+            $longitud = count($showTreeRaw);
+    
+            for($i=0; $i<$longitud; $i = $i + 1)
+            {
+                $showTree[$x] = $showTreeRaw[$i];
+                $x = $x +1;
+            }
+
+           return $showTree;
         }
         
 
-        return $showTree;
+
+
+
 
         
     }

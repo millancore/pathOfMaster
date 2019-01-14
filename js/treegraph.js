@@ -2,7 +2,7 @@ module.exports = function TreeGraph (canvas) {
 
     this.tree = [];
 
-    this.add = function(node){S
+    this.add = function(node){
         this.tree.push(node);
     }
 

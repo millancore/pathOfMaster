@@ -11,13 +11,15 @@ var addTree = function () {
     })
 };
 
-var tree = function (ID) {
+var tree = function (ID,pag) {
     loadTemplate('layout', 'render').then(() => {
         axios.get('templates/nodeDescription.hbs').then(
             function (response) {
                 var template = Handlebars.compile(response.data);
                 document.getElementById('content').innerHTML = template({id:ID});
-                printtree(ID);
+              
+                buttom(ID,pag)
+                printtree(ID,pag);
             }
         );
     })
@@ -46,14 +48,15 @@ function treeListener() {
     }, false);
 }
 
-function printtree(ID){
-    axios.get('api/current/tree/' + ID)
+function printtree(ID,pag){
+
+    axios.get('/api/current/tree/'+ID+'/'+pag)
     .then(function (response) {
         var newtree = response.data;
-        var canvas = SVG("tree-see").size(300, 600);    
+        console.log(newtree);
+        var canvas = SVG("tree-see").size(300, 1000);    
         var newTreeLength = newtree.length;
-
-        console.log(newTreeLength)
+ 
         var graph = new TreeGraph(canvas);
 
         for (let index = 0; index < newTreeLength; index++) {
@@ -67,7 +70,6 @@ function printtree(ID){
                 }
             });
         }
-        console.log(index);
 
         graph.render();  
 })
@@ -78,6 +80,28 @@ function printtree(ID){
 }
 
 
+function buttom(ID,pag){
+         var para = document.createElement("a");
+         para.setAttribute("id", "treeBotton");
+         para.setAttribute("class","button");
+  
+         var node = document.createTextNode("siguiente");
+         para.appendChild(node);
+         
+         var pags = parseInt(pag) + 1 ;
+
+         para.addEventListener('click', function (event) {
+             event.preventDefault();
+             window.location.assign('#/tree/' + ID + '/'+ pags);
+ 
+        
+ 
+         }, false);
+ 
+         document.getElementById("botomm").appendChild(para);
+         
+         
+}
 
 
 

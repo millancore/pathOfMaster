@@ -34,7 +34,7 @@ function homeTree() {
          let treeID = data[x].id;
          para.addEventListener('click', function (event) {
              event.preventDefault();
-             window.location.assign('#/tree/' + treeID);
+             window.location.assign('#/tree/' + treeID + '/1');
  
         
  

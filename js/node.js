@@ -2,11 +2,11 @@ const loadTemplate = require('./templateLoader');
 const getFormDataAsJSON = require('./getFormDataAsJSON');
 const simpleConfig = require('./simpleConfig');
 
-var addNode = function (treeName) {
+var addNode = function (id) {
     loadTemplate('layout', 'render').then(() =>
         loadTemplate('addNode', 'content')
     ).then(() => {
-        newNode(treeName);
+        newNode(id);
     })
 };
 

@@ -20,4 +20,4 @@ $router->post('tree/add', 'TreeController@add');
 $router->post('node/add', 'NodeController@add');
 $router->get('node/list', 'NodeController@list');
 $router->get('tree/homeTree','TreeController@homeTree'); 
-$router->get('tree/{id}','TreeController@showTree');
+$router->get('tree/{id}/{pag}','TreeController@showTree');

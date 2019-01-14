@@ -16,7 +16,6 @@ class NodeController extends Controller
         $cypher = new Cypher;
         $client = new Client('localhost', 7474);
         $client->setAuth('neo4j', 'pom');
-        
         $name = $data['name'];
         $description = $data['descripcion'];
         $link1 = $data['link1'];
@@ -73,8 +72,8 @@ class NodeController extends Controller
                 $client->Cypher("MATCH (a:nodo),(b:nodo)  WHERE ID(a)=".$idCreado." AND ID(b)=".$idNodoDes."  CREATE (a)-[r:sept]->(b) " );
                 $response = $client->execute();
             }
-            var_dump($longitud);
-            var_dump($treePadre);             
+        
+                
         }
 
     }
