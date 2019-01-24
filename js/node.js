@@ -26,7 +26,7 @@ function newNode(id) {
           };
 
         axios.post('api/current/node/add', node, config).then(() => {
-            window.location.assign('#/tree/586');
+            window.location.assign('#/tree/'+ id+'/1');
         });
 
     }, false);

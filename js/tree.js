@@ -66,7 +66,15 @@ function printtree(ID,pag){
                 dercripton: newtree[index].dercripton,
                 id: newtree[index].id,
                 click: function () {
-                    document.getElementById('content').innerHTML = template(newtree[index]);
+                    {        
+                        axios.get('templates/nodeDescription.hbs').then(
+                        function (response) {
+                            var template = Handlebars.compile(response.data);
+                            document.getElementById('content').innerHTML = template(newtree[index]);
+                            buttom(ID,pag)  
+                        }
+                        );
+                    }
                 }
             });
         }
@@ -81,26 +89,38 @@ function printtree(ID,pag){
 
 
 function buttom(ID,pag){
-         var para = document.createElement("a");
-         para.setAttribute("id", "treeBotton");
-         para.setAttribute("class","button");
-  
-         var node = document.createTextNode("siguiente");
-         para.appendChild(node);
-         
-         var pags = parseInt(pag) + 1 ;
+    var pags = parseInt(pag);
+    var paginaNex = pags +1;
 
-         para.addEventListener('click', function (event) {
-             event.preventDefault();
-             window.location.assign('#/tree/' + ID + '/'+ pags);
- 
+        document.getElementById("botomm").appendChild
+         
+         var buttomnex = document.createElement("a");
+         buttomnex.setAttribute("id", "treeBottonNex");
+         buttomnex.setAttribute("class","button");
+         buttomnex.setAttribute("href","http://pathofmaster.local/#/tree/"+ID+"/"+paginaNex+"");
+        var node = document.createTextNode("siguiente");
+         buttomnex.appendChild(node);
+         document.getElementById("botomm").appendChild(buttomnex);
+    
+    var paginaAfter = pags - 1;
+    console.log(paginaNex);
+
+    if(pags > 1 ){
+        document.getElementById("botomm").appendChild
+         
+        var buttomalfter = document.createElement("a");
+        buttomalfter.setAttribute("id", "treeBottonAfter");
+        buttomalfter.setAttribute("class","button");
+        buttomalfter.setAttribute("href","http://pathofmaster.local/#/tree/"+ID+"/"+paginaAfter+"");
+       var node = document.createTextNode("anterior");
+        buttomalfter.appendChild(node);
+        document.getElementById("botomm").appendChild(buttomalfter);
+    
+    }
+
+         
+
         
- 
-         }, false);
- 
-         document.getElementById("botomm").appendChild(para);
-         
-         
 }
 
 

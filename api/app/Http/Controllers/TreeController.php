@@ -23,6 +23,9 @@ class TreeController extends Controller
 
         $tree->setProperty('name', $data['name'])
         ->setProperty('description', $data['description'])
+        ->setProperty('link1', $data['link1'])
+        ->setProperty('link2', $data['link2'])
+        ->setProperty('link3', $data['link3'])
          ->save();
 
          $label  = $client->makeLabel('tree');
@@ -60,14 +63,14 @@ class TreeController extends Controller
 
 
         if($pags < 2){
-            $client->Cypher('MATCH (tree) WHERE ID(tree) = '.$id.' RETURN tree.name as name,tree.description as description,ID(tree) as id');
+            $client->Cypher('MATCH (tree) WHERE ID(tree) = '.$id.' RETURN tree.name as name,tree.description as description,ID(tree) as id,tree.link1 as link1,tree.link2 as link2,tree.link3 as link3');
             $response = $client->execute();
             $treeRaw =  $response->toArray();
 
 
     
         
-            $client->Cypher('MATCH (n:tree) WHERE ID(n)='.$id.'  MATCH (n)-[r:sept*..   ]->(m) RETURN ID(m)  as id , m.name  as name,m.dercripton as  dercripton LIMIT 9');
+            $client->Cypher('MATCH (n:tree) WHERE ID(n)='.$id.'  MATCH (n)-[r:sept*..   ]->(m) RETURN ID(m)  as id , m.name  as name,m.dercripton as  dercripton,m.link1 as link1,m.link2 as link2,m.link3 as link3 LIMIT 9');
             $response = $client->execute();
             $showTreeRaw =  $response->toArray();
             $showTree = [];
@@ -88,7 +91,7 @@ class TreeController extends Controller
             $limt = $pags * 10;
             $skip = ($pags - 1) * 10;
 
-            $client->Cypher('MATCH (n:tree) WHERE ID(n)='.$id.'  MATCH (n)-[r:sept*..   ]->(m) RETURN ID(m)  as id , m.name  as name,m.dercripton as  dercripton SKIP '.$skip.' LIMIT 10');
+            $client->Cypher('MATCH (n:tree) WHERE ID(n)='.$id.'  MATCH (n)-[r:sept*..   ]->(m) RETURN ID(m)  as id , m.name  as name,m.dercripton as  dercripton,m.link1 as link1,m.link2 as link2,m.link3 as link3 SKIP '.$skip.' LIMIT 10');
             $response = $client->execute();
             $showTreeRaw =  $response->toArray();
             $showTree = [];

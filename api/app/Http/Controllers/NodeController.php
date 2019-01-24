@@ -11,48 +11,67 @@ class NodeController extends Controller
     public function add(Request $request)
     {   
         
+
+
         $data = $request->all();
+
+    
 
         $cypher = new Cypher;
         $client = new Client('localhost', 7474);
         $client->setAuth('neo4j', 'pom');
         $name = $data['name'];
-        $description = $data['descripcion'];
+        $description = $data['description'];
         $link1 = $data['link1'];
         $link2 = $data['link2'];
         $link3 = $data['link3'];
+        
+    
+       
 
+        function limpia_espacios($cadena){
+            $cadena = str_replace(' ', '', $cadena);
+            return $cadena;
+        }
+        $nameNodo = limpia_espacios($name);
 
-
-
-        $client->Cypher("CREATE (".$name.":nodo {name:'".$name."',dercripton:'".$description."',link1:'".$link1."',link2:'".$link2."',link3:'".$link3."'}) RETURN  ID(".$name.") as id " );
+        $client->Cypher("CREATE (".$nameNodo.":nodo {name:'".$name."',dercripton:'".$description."',link1:'".$link1."',link2:'".$link2."',link3:'".$link3."'}) RETURN  ID(".$nameNodo.") as id " );
         $response = $client->execute();
         $nodoCreado = $response->toArray();
-
-
-
 
      
         $idCreado = $nodoCreado[0]['id']; 
         $idPadre = $data['id'];
 
+    
+  
+
 
         $client->Cypher("MATCH (n:nodo) WHERE ID(n) = ".$idPadre." RETURN n" );
         $response = $client->execute();
         $nodoPadre =  $response->toArray();
-        
+
+
         if (empty($nodoPadre)) {
-            $client->Cypher("MATCH (a:tree),(b:nodo) WHERE ID(a)=".$idPadre." AND ID(b)=".$idCreado." CREATE (a)-[r:sept]->(b) RETURN r" );
+            $client->Cypher("MATCH (n:tree) WHERE ID(n)='.$idPadre.'  MATCH (n)-[r:sept*..   ]->(m) RETURN ID(m)  as id , m.name  as name,m.dercripton as  dercripton,m.link1 as link1,m.link2 as link2,m.link3 as link3 " );
             $response = $client->execute();
             $treePadre =  $response->toArray();
-
+            
             var_dump($treePadre);
+     
+            $client->Cypher("MATCH (a:tree),(b:nodo) WHERE ID(a)=".$idPadre." AND ID(b)=".$idCreado." CREATE (a)-[r:sept]->(b) RETURN r" );
+            $response = $client->execute();
+            $treePadre =  $response->toArray(); 
+
+           
 
         }else{
             $client->Cypher("MATCH (a:nodo) WHERE ID(a)=".$idPadre." MATCH (a)-[:sept]-(nodo) RETURN ID(nodo) as id" );
             $response = $client->execute();
             $treePadre =  $response->toArray();
             $longitud = count($treePadre);
+
+            var_dump($longitud);
           
            if ($longitud < 2) {
 

@@ -51,10 +51,17 @@ body{
 
 }
 
-#treeBotton{
+#treeBottonNex{
     position: absolute;
     top: 550px;
     right:1050px;
+    width:200px;
+}
+
+#treeBottonAfter{
+    position: absolute;
+    top: 75px;
+    right:1145px;
     width:200px;
 }
 
